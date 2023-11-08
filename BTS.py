@@ -467,7 +467,7 @@ for h in range(task_number1):
 print('memory=',tracemalloc.get_traced_memory())
 M1,M2=tracemalloc.get_traced_memory()
 tracemalloc.stop()
-'时间测试'
+
 dateTime_e=time.time() 
 dateTime_e=datetime.datetime.fromtimestamp(dateTime_e) 
 print('total running time=',dateTime_e-dateTime_s)
