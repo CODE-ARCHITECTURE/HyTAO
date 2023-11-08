@@ -83,7 +83,6 @@ def find_neighbour_two(path):
     return temp_path
 
 def find_neighbour_one(path):
-    # 随机选择两个city, 不改变先后顺序
     endpoints = random.sample(range(1, len(path)-1), 2)
     endpoints.sort()
     temp_path = deepcopy(path)
@@ -109,7 +108,7 @@ def tree_built(temp_worker_tables,task_tables_1):
                array1.append(i)
                node_worker[idle_st]=array1
            workeri_idle_period[0]=[[],0,0+3000000000,[]]
-           temp_worker_tables[i]['idle_period']=workeri_idle_period#'添加worker i的空闲信息'{idle_period:{idel time:[idle time,end time,[task_number]]}}
+           temp_worker_tables[i]['idle_period']=workeri_idle_period
         else:
             worker_sch_task={}
             for j in sch_task:
@@ -221,15 +220,15 @@ x+=1
 template_worker_tables=deepcopy(worker_tables)
 template_worker_tables3=deepcopy(worker_tables3)
 
-(tree_node,node_worker,template_worker_tables)=tree_built(template_worker_tables,template_task_tables)#固有worker的
+(tree_node,node_worker,template_worker_tables)=tree_built(template_worker_tables,template_task_tables)
 tree_node2=[]
 node_worker2={}
 worker_tables2={}
 root=Node(0)
 flag=0'   
 waiting_task=[]
-'第一步：对固有worker建立树结构，树节点查找，节点内worker选择'
-root3=Node(tree_node[0])#根节点需要为非0
+
+root3=Node(tree_node[0])
 for i in range(len(tree_node)):
     root3.insert(tree_node[i])
 array3=root3.inorderTraversal(root3) 
@@ -237,14 +236,14 @@ array3=root3.inorderTraversal(root3)
 task_number1=len(template_task_tables)#int(len(template_task_tables)/2)
 assigned_tasks=1
 for h in range(task_number1):     
-    '搜索' 
+
     if __name__ == '__main__':
         waiting_task_number=h
         r=search(array3, template_task_tables[waiting_task_number]['st'][0])    
     node_result=[]
     for i in range(r+1):
         node_result.append(array3[i])        
-    '节点内计算'
+
     temp_tree_node_worker_order={}
     tree_node_worker_order={}
     for i in node_result:
@@ -297,7 +296,7 @@ for h in range(task_number1):
                                 incert_tree_node=i
                 else:
                     break
-    '更新'
+
     if (utility>0):
         template_worker_tables[incert_worker]['schedule'].append(waiting_task_number)
         pre_idle=listcopy(template_worker_tables[incert_worker]['idle_period'][incert_tree_node])
@@ -379,7 +378,7 @@ for h in range(task_number1):
                                         incert_tree_node=i
                         else:
                             break
-            '更新'
+
             if (utility>0):
                 worker_tables2[incert_worker]['schedule'].append(waiting_task_number)
                 pre_idle=listcopy(worker_tables2[incert_worker]['idle_period'][incert_tree_node])
@@ -474,9 +473,9 @@ for h in range(task_number1):
 print('memory=',tracemalloc.get_traced_memory())
 M1,M2=tracemalloc.get_traced_memory()
 tracemalloc.stop()
-'时间测试'
-dateTime_e=time.time() #获取当前时间戳
-dateTime_e=datetime.datetime.fromtimestamp(dateTime_e) #将时间戳转换为日期
+
+dateTime_e=time.time() 
+dateTime_e=datetime.datetime.fromtimestamp(dateTime_e) 
 print('total running time=',dateTime_e-dateTime_s)
 running_time=(dateTime_e-dateTime_s).total_seconds()
 complete_task1=0
