@@ -104,7 +104,7 @@ def tree_built(temp_worker_tables,task_tables_1):
                array1.append(i)
                node_worker[idle_st]=array1
            workeri_idle_period[0]=[[],0,0+3000000000,[]]
-           temp_worker_tables[i]['idle_period']=workeri_idle_period#'添加worker i的空闲信息'{idle_period:{idel time:[idle time,end time,[task_number]]}}
+           temp_worker_tables[i]['idle_period']=workeri_idle_period
         else:
             worker_sch_task={}
             for j in sch_task:
@@ -360,7 +360,7 @@ for h in range(task_number1):
                             else:
                                 distance2=0
                                 distance0=0
-                            differe_distance=distance2+distance1-distance0#计算插入任务后travel distance的变化
+                            differe_distance=distance2+distance1-distance0
                             move_time2=round(distance2/worker_tables2[temp_worker]['speed'][0],3)
                             start_time2=template_task_tables[waiting_task_number]['st'][0]+template_task_tables[waiting_task_number]['pt'][0]
                             if ((move_time1+start_time1)<template_task_tables[waiting_task_number]['st'][0]):
