@@ -75,23 +75,6 @@ class Node:
             res = res + self.inorderTraversal(root.right)
         return res
 
-def find_neighbour_two(path):
-    exchange = random.sample(range(1, len(path)-1), 2)
-    temp_path = deepcopy(path)
-    temp_path[exchange[0]] = path[exchange[1]]
-    temp_path[exchange[1]] = path[exchange[0]]
-    return temp_path
-
-def find_neighbour_one(path):
-    endpoints = random.sample(range(1, len(path)-1), 2)
-    endpoints.sort()
-    temp_path = deepcopy(path)
-    temp_path[0]=path[endpoints[0]]
-    temp_path[1]=path[endpoints[1]]
-    temp_path[endpoints[0]]=path[0]
-    temp_path[endpoints[1]]=path[1]
-    return temp_path
-
 def tree_built(temp_worker_tables,task_tables_1):
     tree_node=[]
     node_worker={}
@@ -235,8 +218,10 @@ array3=root3.inorderTraversal(root3)
 
 task_number1=len(template_task_tables)#int(len(template_task_tables)/2)
 assigned_tasks=1
+processed_T=0
+threshold=random.randint(0,2.37)
 for h in range(task_number1):     
-
+    processed_T=processed_T+1
     if __name__ == '__main__':
         waiting_task_number=h
         r=search(array3, template_task_tables[waiting_task_number]['st'][0])    
@@ -297,7 +282,7 @@ for h in range(task_number1):
                 else:
                     break
 
-    if (utility>0):
+    if (utility>threshold): #total_utility/processed_T
         template_worker_tables[incert_worker]['schedule'].append(waiting_task_number)
         pre_idle=listcopy(template_worker_tables[incert_worker]['idle_period'][incert_tree_node])
         template_worker_tables[incert_worker]['idle_period'][incert_tree_node][2]=template_task_tables[waiting_task_number]['st'][0]
